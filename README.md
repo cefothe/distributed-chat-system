@@ -1,1 +1,1 @@
-# distributed-chat-system
+# Destributed chat bot for Supply Chain
