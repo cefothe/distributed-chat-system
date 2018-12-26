@@ -1,12 +1,10 @@
 package eu.stefanangelov.chatbot.chatservice.controller;
 
-import eu.stefanangelov.chatbot.chatservice.models.Message;
 import eu.stefanangelov.chatbot.chatservice.respository.MessageRepository;
 import eu.stefanangelov.chatbot.chatservice.to.MessageTO;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;

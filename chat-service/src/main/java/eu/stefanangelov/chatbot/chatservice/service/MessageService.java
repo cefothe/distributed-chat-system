@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * This service is responsible to handle all operation for messages
+ *
  * Created by Stefan Angelov - Delta Source Bulgaria on 26.12.18.
  */
 
@@ -29,6 +31,10 @@ public class MessageService {
     @Value("${bot.service.url}")
     private String botServiceUrl;
 
+    /**
+     * Process user message {@link MessageTO} and save it into database
+     * @param messageTO incoming message from web socket
+     */
     public void processUserMessage(MessageTO messageTO){
         log.info("Persist user message with user indentificator {}", messageTO.getUserIdentificator());
         Message message = modelMapper.map(messageTO, Message.class);
@@ -36,6 +42,11 @@ public class MessageService {
         log.info("Message is successfully persistent");
     }
 
+    /**
+     * Send user message to bot service and save it into database
+     * @param messageTO incoming user message from web socket
+     * @return return response from chat service
+     */
     public MessageTO askBot(MessageTO messageTO){
         log.info("Send message to bot");
         ResponseEntity<MessageTO> botResponse = restTemplate.postForEntity(botServiceUrl, messageTO, MessageTO.class);

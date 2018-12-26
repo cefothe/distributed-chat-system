@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2018-12-26T11:59:47.122Z[GMT]")
-
-@Api(value = "messages", description = "the messages API")
+/**
+ * Define message api interface
+ */
 public interface MessagesApi {
 
     @ApiOperation(value = "Get all user messages", nickname = "messagesGet", notes = "", responseContainer = "List",

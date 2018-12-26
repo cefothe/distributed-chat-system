@@ -10,6 +10,7 @@ import java.util.Date;
 
 
 /**
+ * Transfer object to UI to represent messages
  * Created by Stefan Angelov - Delta Source Bulgaria on 26.12.18.
  */
 @Data
