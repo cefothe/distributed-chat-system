@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<org.modelmapper.version>2.3.2</org.modelmapper.version>
+		<io.swagger.version>1.5.21</io.swagger.version>
 	</properties>
 
 	<dependencies>
@@ -52,7 +53,7 @@
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-annotations</artifactId>
-			<version>1.5.21</version>
+			<version>${io.swagger.version}</version>
 		</dependency>
 
 		<dependency>

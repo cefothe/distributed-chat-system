@@ -1,0 +1,39 @@
+# SalesOrders Entity
+---
+type: entity
+name: SalesOrders
+values:
+  - sales orders
+  - [order, sales]
+
+# Identifier Entity
+---
+type: entity
+name: Identifier
+
+# GetSalesOrderById Intent
+---
+type: intent
+name: getSalesOrderById
+utterances:
+  - Show me [salesorder:SalesOrders](sales order) with id [identifier:Identifier](123)
+  - Give me [salesorder:SalesOrders](sales order) with identificator [identifier:Identifier](4345)
+
+# Greeting
+---
+type: intent
+name: greeting
+utterances:
+  - Hello
+  - hey
+  - Good Morning
+  - Hey bot
+
+# Goodbye
+---
+type: intent
+name: goodbye
+utterances:
+  - Goodbye
+  - bye
+  - Have nice day
