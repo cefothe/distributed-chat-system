@@ -14,7 +14,7 @@ import java.util.Date;
 public class Message {
 
     @Id
-    private Long messageId;
+    private String messageId;
 
     private String userIndentificator;
 
