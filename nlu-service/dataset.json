@@ -1,0 +1,131 @@
+{
+  "entities": {
+    "Identifier": {
+      "automatically_extensible": true,
+      "data": [],
+      "matching_strictness": 1.0,
+      "use_synonyms": true
+    },
+    "SalesOrders": {
+      "automatically_extensible": true,
+      "data": [
+        {
+          "synonyms": [],
+          "value": "sales orders"
+        },
+        {
+          "synonyms": [
+            "sales"
+          ],
+          "value": "order"
+        }
+      ],
+      "matching_strictness": 1.0,
+      "use_synonyms": true
+    }
+  },
+  "intents": {
+    "getSalesOrderById": {
+      "utterances": [
+        {
+          "data": [
+            {
+              "text": "Show me "
+            },
+            {
+              "entity": "SalesOrders",
+              "slot_name": "salesorder",
+              "text": "sales order"
+            },
+            {
+              "text": " with id "
+            },
+            {
+              "entity": "Identifier",
+              "slot_name": "identifier",
+              "text": "123"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Give me "
+            },
+            {
+              "entity": "SalesOrders",
+              "slot_name": "salesorder",
+              "text": "sales order"
+            },
+            {
+              "text": " with identificator "
+            },
+            {
+              "entity": "Identifier",
+              "slot_name": "identifier",
+              "text": "4345"
+            }
+          ]
+        }
+      ]
+    },
+    "goodbye": {
+      "utterances": [
+        {
+          "data": [
+            {
+              "text": "Goodbye"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "bye"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Have nice day"
+            }
+          ]
+        }
+      ]
+    },
+    "greeting": {
+      "utterances": [
+        {
+          "data": [
+            {
+              "text": "Hello"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "hey"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Good Morning"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Hey bot"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "language": "en"
+}

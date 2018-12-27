@@ -1,0 +1,39 @@
+{
+  "config": {
+    "max_pattern_length": 1000,
+    "max_queries": 100,
+    "unit_name": "deterministic_intent_parser"
+  },
+  "group_names_to_slot_names": {
+    "group_0": "salesorder",
+    "group_1": "identifier",
+    "group_2": "salesorder",
+    "group_3": "identifier"
+  },
+  "language_code": "en",
+  "patterns": {
+    "getSalesOrderById": [
+      "^\\s*Show\\s*me\\s*(?P<group_0>%SALESORDERS%)\\s*with\\s*id\\s*(?P<group_1>%IDENTIFIER%)\\s*$",
+      "^\\s*Give\\s*me\\s*(?P<group_2>%SALESORDERS%)\\s*with\\s*identificator\\s*(?P<group_3>%IDENTIFIER%)\\s*$"
+    ],
+    "goodbye": [
+      "^\\s*bye\\s*$",
+      "^\\s*Goodbye\\s*$",
+      "^\\s*Have\\s*nice\\s*day\\s*$"
+    ],
+    "greeting": [
+      "^\\s*Good\\s*Morning\\s*$",
+      "^\\s*Hey\\s*bot\\s*$",
+      "^\\s*hey\\s*$",
+      "^\\s*Hello\\s*$"
+    ]
+  },
+  "slot_names_to_entities": {
+    "getSalesOrderById": {
+      "identifier": "Identifier",
+      "salesorder": "SalesOrders"
+    },
+    "goodbye": {},
+    "greeting": {}
+  }
+}

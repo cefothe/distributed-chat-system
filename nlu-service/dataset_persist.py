@@ -10,6 +10,4 @@ load_resources(u"en")
 nlu_engine = SnipsNLUEngine()
 
 nlu_engine.fit(sample_dataset)
-
-parsing = nlu_engine.parse(u"Bye")
-print(json.dumps(parsing, indent=1))
+nlu_engine.persist("train")
