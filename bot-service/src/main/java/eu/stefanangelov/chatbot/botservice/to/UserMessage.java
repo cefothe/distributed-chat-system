@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -14,19 +16,24 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2018-12-26T20:27:12.373Z[GMT]")
-
-public class UserMessage   {
+public class UserMessage {
   @JsonProperty("messageId")
+  @NotNull
+  @NotEmpty
   private String messageId = null;
 
   @JsonProperty("userIdentificator")
+  @NotNull
+  @NotEmpty
   private String userIdentificator = null;
 
   @JsonProperty("created")
+  @NotNull
   private Date created = null;
 
   @JsonProperty("content")
+  @NotNull
+  @NotEmpty
   private String content = null;
 }
 
