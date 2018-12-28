@@ -1,5 +1,7 @@
 package eu.stefanangelov.chatbot.botservice.service;
 
+import eu.stefanangelov.chatbot.botservice.flow.FlowFactoryService;
+import eu.stefanangelov.chatbot.botservice.flow.FlowProcessor;
 import eu.stefanangelov.chatbot.botservice.nlu.service.NLURestService;
 import eu.stefanangelov.chatbot.botservice.nlu.to.NluResponse;
 import eu.stefanangelov.chatbot.botservice.to.BotResponse;
@@ -24,10 +26,13 @@ public class BotService implements Function<UserMessage, BotResponse> {
 
     private final NLURestService nluRestService;
 
+    private final FlowFactoryService flowFactoryService;
+
     @Override
     public BotResponse apply(UserMessage userMessage) {
         log.info("Process message with id {} for user with identificator {}", userMessage.getMessageId(), userMessage.getUserIdentificator());
         ResponseEntity<NluResponse> nluResponse = nluRestService.apply(userMessage);
-        return null;
+        FlowProcessor flowProcessor = flowFactoryService.apply(nluResponse.getBody().getIntent());
+        return flowProcessor.execute(nluResponse.getBody());
     }
 }

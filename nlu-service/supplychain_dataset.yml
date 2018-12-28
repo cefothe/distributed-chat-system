@@ -6,6 +6,13 @@ values:
   - sales orders
   - [order, sales]
 
+# SupplyOrder Entity
+---
+type: entity
+name: SupplyOrder
+values:
+  - supply order
+
 # Identifier Entity
 ---
 type: entity
@@ -18,6 +25,15 @@ name: getSalesOrderById
 utterances:
   - Show me [salesorder:SalesOrders](sales order) with id [identifier:Identifier](123)
   - Give me [salesorder:SalesOrders](sales order) with identificator [identifier:Identifier](4345)
+
+# GetAllSupplyOrders
+---
+type: intent
+name: getAllSupplyOrders
+utterances:
+  - Show me all [supplyorder:SupplyOrder](supply orders)
+  - Give me all [supplyorder:SupplyOrder](supply orders)
+
 
 # Greeting
 ---

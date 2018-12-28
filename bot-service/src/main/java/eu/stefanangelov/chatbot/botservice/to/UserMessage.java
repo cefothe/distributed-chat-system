@@ -17,6 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Validated
 public class UserMessage {
+
   @JsonProperty("messageId")
   @NotNull
   @NotEmpty
