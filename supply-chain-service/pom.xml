@@ -72,6 +72,12 @@
 			<version>${graphql.java.kickstart}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.zhokhov.graphql</groupId>
+			<artifactId>graphql-datetime-spring-boot-starter</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+
 		<!-- testing facilities -->
 		<dependency>
 			<groupId>com.graphql-java-kickstart</groupId>

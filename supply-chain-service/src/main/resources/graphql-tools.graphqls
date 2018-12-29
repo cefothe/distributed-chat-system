@@ -11,3 +11,12 @@ type SalesOrder {
     estimatedDeliveryDate: LocalDateTime
     plannedShipDate: LocalDateTime
 }
+# java.time.LocalDateTime implementation
+scalar LocalDateTime
+
+enum OrderStatus {
+    DRAFT
+    CONFIRMED
+    CLOSED
+    VOID
+}
