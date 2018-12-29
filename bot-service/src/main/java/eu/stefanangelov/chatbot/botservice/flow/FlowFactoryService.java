@@ -2,8 +2,8 @@ package eu.stefanangelov.chatbot.botservice.flow;
 
 import eu.stefanangelov.chatbot.botservice.configuration.FlowPropertiesConfiguration;
 import eu.stefanangelov.chatbot.botservice.nlu.to.Intent;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -15,14 +15,13 @@ import static eu.stefanangelov.chatbot.botservice.flow.anything.AnythingFlowProc
  * Created by Stefan Angelov - Delta Source Bulgaria on 28.12.18.
  */
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class FlowFactoryService implements Function<Intent, FlowProcessor> {
 
-    @Autowired
-    private Map<String, FlowProcessor> flows;
+    private final Map<String, FlowProcessor> flows;
 
-    @Autowired
-    private FlowPropertiesConfiguration flowPropertiesConfiguration;
+    private final FlowPropertiesConfiguration flowPropertiesConfiguration;
 
     @Override
     public FlowProcessor apply(Intent intent) {
