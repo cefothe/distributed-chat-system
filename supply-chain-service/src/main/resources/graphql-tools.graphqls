@@ -1,0 +1,13 @@
+type Query {
+    salesOrderById(id: ID!):SalesOrder
+}
+type SalesOrder {
+    id: ID!
+    orderValue: Long
+    recordCreated: LocalDateTime
+    quantity: Long
+    requestedShipDate: LocalDateTime
+    orderStatus: OrderStatus
+    estimatedDeliveryDate: LocalDateTime
+    plannedShipDate: LocalDateTime
+}
