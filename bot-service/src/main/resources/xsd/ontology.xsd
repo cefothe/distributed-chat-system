@@ -1,0 +1,29 @@
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="ontology" type="ontologyType"/>
+    <xs:complexType name="ontologyType">
+        <xs:sequence>
+            <xs:element name="class" type="classType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="classType">
+        <xs:all>
+            <xs:element name="spelling" type="xs:string" minOccurs="0"/>
+            <xs:element name="subClassOf" type="xs:string" minOccurs="0"/>
+            <xs:element name="attributes" type="attributesTypes" minOccurs="0"/>
+        </xs:all>
+        <xs:attribute name="name" use="required" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="attributesTypes">
+        <xs:sequence>
+            <xs:element name="attribute" type="attributeType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="attributeType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="class" use="required" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>

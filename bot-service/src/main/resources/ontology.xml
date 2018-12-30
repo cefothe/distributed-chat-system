@@ -1,0 +1,51 @@
+<ontology>
+    <class name="Showable"/>
+    <class name="Attribute"/>
+    <class name="Status">
+        <spelling>status</spelling>
+        <subClassOf>Attribute</subClassOf>
+    </class>
+    <class name="Identifier">
+        <spelling>status</spelling>
+        <subClassOf>Attribute</subClassOf>
+    </class>
+    <class name="Value">
+        <spelling>value</spelling>
+        <subClassOf>Attribute</subClassOf>
+    </class>
+    <class name="DateCreated">
+        <spelling>date created</spelling>
+        <subClassOf>Attribute</subClassOf>
+    </class>
+    <class name="Quantity">
+        <spelling>quantity</spelling>
+        <subClassOf>Attribute</subClassOf>
+    </class>
+    <class name="RequestedShipDate">
+        <spelling>requested ship date</spelling>
+        <subClassOf>Attribute</subClassOf>
+    </class>
+    <class name="EstimatedDeliveryDate">
+        <spelling>estimated delivery date</spelling>
+        <subClassOf>Attribute</subClassOf>
+    </class>
+    <class name="PlannedShipDate">
+        <spelling>planned ship date</spelling>
+        <subClassOf>Attribute</subClassOf>
+    </class>
+
+    <class name="SalesOrder">
+        <subClassOf>Showable</subClassOf>
+        <spelling>sales order</spelling>
+        <attributes>
+            <attribute class="Status">orderStatus</attribute>
+            <attribute class="Identifier">id</attribute>
+            <attribute class="Value">orderValue</attribute>
+            <attribute class="DateCreated">recordCreated</attribute>
+            <attribute class="Quantity">quantity</attribute>
+            <attribute class="RequestedShipDate">requestedShipDate</attribute>
+            <attribute class="EstimatedDeliveryDate">estimatedDeliveryDate</attribute>
+            <attribute class="PlannedShipDate">plannedShipDate</attribute>
+        </attributes>
+    </class>
+</ontology>

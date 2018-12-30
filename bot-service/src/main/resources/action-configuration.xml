@@ -1,0 +1,8 @@
+<actions>
+    <action name="salesOrderById">
+        <class>SalesOrder</class>
+        <requestParams>
+            <param>Identifier</param>
+        </requestParams>
+    </action>
+</actions>
