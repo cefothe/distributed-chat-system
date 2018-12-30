@@ -18,6 +18,8 @@
 		<java.version>1.8</java.version>
 		<io.swagger.version>1.5.21</io.swagger.version>
 		<org.modelmapper.version>2.3.2</org.modelmapper.version>
+		<jaxb2.maven.plugin.version>2.4</jaxb2.maven.plugin.version>
+		<build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
 	</properties>
 
 	<dependencies>
@@ -34,12 +36,12 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.json/json -->
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20180813</version>
-		</dependency>
+		<!--&lt;!&ndash; https://mvnrepository.com/artifact/org.json/json &ndash;&gt;-->
+		<!--<dependency>-->
+		<!--<groupId>org.json</groupId>-->
+		<!--<artifactId>json</artifactId>-->
+		<!--<version>20180813</version>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -73,6 +75,58 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>${jaxb2.maven.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>ontology</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<clearOutputDir>false</clearOutputDir>
+							<sources>
+								<source>${project.basedir}/src/main/resources/xsd/ontology.xsd</source>
+							</sources>
+							<packageName>eu.stefanangelov.chatbot.botservice.ontology.to</packageName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>action</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<clearOutputDir>false</clearOutputDir>
+							<sources>
+								<source>${project.basedir}/src/main/resources/xsd/action.xsd</source>
+							</sources>
+							<packageName>eu.stefanangelov.chatbot.botservice.action.to</packageName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>${build.helper.maven.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>target/generated-sources/jaxb</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,7 +1,6 @@
 package eu.stefanangelov.chatbot.botservice.supplychain.service;
 
 import lombok.RequiredArgsConstructor;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,7 +14,7 @@ import java.util.function.Function;
  */
 @RequiredArgsConstructor
 @Service
-public class GraphQLTemplate implements Function<String, JSONObject> {
+public class GraphQLTemplate implements Function<String, String> {
 
     @Value("${supply.chain.service.url}")
     private String grapQLurl;
@@ -23,7 +22,7 @@ public class GraphQLTemplate implements Function<String, JSONObject> {
     private final RestTemplate restTemplate;
 
     @Override
-    public JSONObject apply(String query) {
-        return restTemplate.postForEntity(grapQLurl, query, JSONObject.class).getBody();
+    public String apply(String query) {
+        return restTemplate.postForEntity(grapQLurl, query, String.class).getBody();
     }
 }
