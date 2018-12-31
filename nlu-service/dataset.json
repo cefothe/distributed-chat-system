@@ -22,48 +22,43 @@
       ],
       "matching_strictness": 1.0,
       "use_synonyms": true
+    },
+    "SupplyOrder": {
+      "automatically_extensible": true,
+      "data": [
+        {
+          "synonyms": [],
+          "value": "supply order"
+        }
+      ],
+      "matching_strictness": 1.0,
+      "use_synonyms": true
     }
   },
   "intents": {
-    "getSalesOrderById": {
+    "getAllSupplyOrders": {
       "utterances": [
         {
           "data": [
             {
-              "text": "Show me "
+              "text": "Show me all "
             },
             {
-              "entity": "SalesOrders",
-              "slot_name": "salesorder",
-              "text": "sales order"
-            },
-            {
-              "text": " with id "
-            },
-            {
-              "entity": "Identifier",
-              "slot_name": "identifier",
-              "text": "123"
+              "entity": "SupplyOrder",
+              "slot_name": "supplyorder",
+              "text": "supply orders"
             }
           ]
         },
         {
           "data": [
             {
-              "text": "Give me "
+              "text": "Give me all "
             },
             {
-              "entity": "SalesOrders",
-              "slot_name": "salesorder",
-              "text": "sales order"
-            },
-            {
-              "text": " with identificator "
-            },
-            {
-              "entity": "Identifier",
-              "slot_name": "identifier",
-              "text": "4345"
+              "entity": "SupplyOrder",
+              "slot_name": "supplyorder",
+              "text": "supply orders"
             }
           ]
         }
@@ -121,6 +116,71 @@
           "data": [
             {
               "text": "Hey bot"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Hello everyone!"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "I just wanted to say hello"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Hello again"
+            }
+          ]
+        }
+      ]
+    },
+    "salesOrderById": {
+      "utterances": [
+        {
+          "data": [
+            {
+              "text": "Show me "
+            },
+            {
+              "entity": "SalesOrders",
+              "slot_name": "salesorder",
+              "text": "sales order"
+            },
+            {
+              "text": " with id "
+            },
+            {
+              "entity": "Identifier",
+              "slot_name": "identifier",
+              "text": "123"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Give me "
+            },
+            {
+              "entity": "SalesOrders",
+              "slot_name": "salesorder",
+              "text": "sales order"
+            },
+            {
+              "text": " with identificator "
+            },
+            {
+              "entity": "Identifier",
+              "slot_name": "identifier",
+              "text": "4345"
             }
           ]
         }

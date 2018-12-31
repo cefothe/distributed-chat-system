@@ -2,7 +2,9 @@ package eu.stefanangelov.chatbot.botservice.supplychain;
 
 import eu.stefanangelov.chatbot.botservice.action.ActionService;
 import eu.stefanangelov.chatbot.botservice.nlu.to.NluResponse;
+import eu.stefanangelov.chatbot.botservice.nlu.to.Slot;
 import eu.stefanangelov.chatbot.botservice.ontology.OntologyService;
+import eu.stefanangelov.chatbot.botservice.ontology.to.AttributeType;
 import eu.stefanangelov.chatbot.botservice.ontology.to.ClassType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class GraphQLBuilder {
         sb.append("{\"query\":\"\\n{\\n  ");
         actionService.findIntentByName(nluResponse.getIntent().getIntentName()).ifPresent(
                 x -> {
-                    sb.append(x.getName() + "(");
+                    sb.append(x.getName()).append("(");
                     if (x.getRequestParams() != null && x.getRequestParams().getParam() != null) {
                         sb.append(nameOfParam(x.getRequestParams().getParam(), ontologyService.findClassByName(x.getClazz())) + ":");
                         sb.append(slotValue(nluResponse, x.getRequestParams().getParam()));
@@ -42,21 +44,25 @@ public class GraphQLBuilder {
     private void applyAttributes(StringBuilder sb, Optional<ClassType> classByName) {
         classByName.ifPresent(x -> {
             sb.append("{");
-            x.getAttributes().getAttribute().stream().forEach(attributeType -> {
-                sb.append(attributeType.getValue() + "\\n");
-            });
+            x.getAttributes().getAttribute().forEach(attributeType ->
+                    sb.append(attributeType.getValue()).append("\\n")
+            );
             sb.append("}");
         });
     }
 
     private String slotValue(NluResponse nluResponse, String entityName) {
-        return nluResponse.getSlots().stream().filter(slot -> slot.getEntity().equals(entityName)).findAny().get().getValue().getValue();
+        return nluResponse.getSlots().stream().filter(slot -> slot.getEntity().equals(entityName)).findAny()
+                .map(Slot::getValue).orElseThrow(IllegalAccessError::new).getValue();
     }
 
     private String nameOfParam(String param, Optional<ClassType> classByName) {
-        ClassType classType = classByName.get();
-        return classType.getAttributes().getAttribute().stream()
-                .filter(attributeType -> attributeType.getClazz().equals(param))
-                .findAny().get().getValue();
+        return classByName.map(clazz ->
+                clazz.getAttributes().getAttribute().stream()
+                        .filter(x -> x.getClazz().equals(param))
+                        .findAny()
+                        .orElseThrow(IllegalArgumentException::new))
+                .map(AttributeType::getValue).orElseThrow(IllegalArgumentException::new);
+
     }
 }

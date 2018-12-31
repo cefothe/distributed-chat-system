@@ -21,7 +21,7 @@ name: Identifier
 # GetSalesOrderById Intent
 ---
 type: intent
-name: getSalesOrderById
+name: salesOrderById
 utterances:
   - Show me [salesorder:SalesOrders](sales order) with id [identifier:Identifier](123)
   - Give me [salesorder:SalesOrders](sales order) with identificator [identifier:Identifier](4345)
