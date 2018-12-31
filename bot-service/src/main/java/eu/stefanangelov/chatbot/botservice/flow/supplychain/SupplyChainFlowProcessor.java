@@ -7,6 +7,7 @@ import eu.stefanangelov.chatbot.botservice.supplychain.GraphQLTemplate;
 import eu.stefanangelov.chatbot.botservice.to.BotResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,8 +25,8 @@ public class SupplyChainFlowProcessor implements FlowProcessor {
     @Override
     public BotResponse execute(NluResponse nluResponse) {
         String graphQLQuery = graphQLBuilder.buildQuery(nluResponse);
-        String response = graphQLTemplate.apply(graphQLQuery);
-        log.info(response);
+        JSONObject response = graphQLTemplate.apply(graphQLQuery);
+        log.info(response.toString());
         return null;
     }
 }

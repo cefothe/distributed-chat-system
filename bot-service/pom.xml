@@ -20,6 +20,7 @@
 		<org.modelmapper.version>2.3.2</org.modelmapper.version>
 		<jaxb2.maven.plugin.version>2.4</jaxb2.maven.plugin.version>
 		<build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
+        <org.json.version>20180813</org.json.version>
 	</properties>
 
 	<dependencies>
@@ -36,12 +37,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!--&lt;!&ndash; https://mvnrepository.com/artifact/org.json/json &ndash;&gt;-->
-		<!--<dependency>-->
-		<!--<groupId>org.json</groupId>-->
-		<!--<artifactId>json</artifactId>-->
-		<!--<version>20180813</version>-->
-		<!--</dependency>-->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${org.json.version}</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
