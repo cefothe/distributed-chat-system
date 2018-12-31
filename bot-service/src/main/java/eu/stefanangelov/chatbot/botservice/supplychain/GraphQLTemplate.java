@@ -1,4 +1,4 @@
-package eu.stefanangelov.chatbot.botservice.supplychain.service;
+package eu.stefanangelov.chatbot.botservice.supplychain;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

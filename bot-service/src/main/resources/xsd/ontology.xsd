@@ -1,11 +1,13 @@
 <xs:schema
         xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="ontology" type="ontologyType"/>
-    <xs:complexType name="ontologyType">
-        <xs:sequence>
-            <xs:element name="class" type="classType" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="ontology">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="class" type="classType" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="classType">
         <xs:all>
             <xs:element name="spelling" type="xs:string" minOccurs="0"/>
