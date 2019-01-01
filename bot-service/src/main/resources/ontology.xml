@@ -6,7 +6,7 @@
         <subClassOf>Attribute</subClassOf>
     </class>
     <class name="Identifier">
-        <spelling>status</spelling>
+        <spelling>id</spelling>
         <subClassOf>Attribute</subClassOf>
     </class>
     <class name="Value">
