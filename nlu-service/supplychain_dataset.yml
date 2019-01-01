@@ -18,10 +18,17 @@ values:
 type: entity
 name: Identifier
 
+# Order Status Entity
+---
+type: entity
+name: OrderStatus
+values:
+  -  DRAFT, CONFIRMED, CLOSED, VOID
+
 # GetSalesOrderById Intent
 ---
 type: intent
-name: salesOrderById
+name: saleOrderById
 utterances:
   - Show me [salesorder:SalesOrders](sales order) with id [identifier:Identifier](123)
   - Give me [salesorder:SalesOrders](sales order) with identificator [identifier:Identifier](4345)
@@ -29,7 +36,7 @@ utterances:
 # GetAllSupplyOrders
 ---
 type: intent
-name: getAllSupplyOrders
+name: allSupplyOrders
 utterances:
   - Show me all [supplyorder:SupplyOrder](supply orders)
   - Give me all [supplyorder:SupplyOrder](supply orders)
