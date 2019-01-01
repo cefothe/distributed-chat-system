@@ -1,6 +1,7 @@
 package eu.stefanangelov.chatbot.botservice.supplychain;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.function.Function;
  * <p>
  * Created by Stefan Angelov - Delta Source Bulgaria on 30.12.18.
  */
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class GraphQLTemplate implements Function<String, JSONObject> {
@@ -24,6 +26,7 @@ public class GraphQLTemplate implements Function<String, JSONObject> {
 
     @Override
     public JSONObject apply(String query) {
+        log.info("Send GraphqlQL query");
         String jsonResponse = restTemplate.postForEntity(grapQLurl, query, String.class).getBody();
         return new JSONObject(jsonResponse);
     }

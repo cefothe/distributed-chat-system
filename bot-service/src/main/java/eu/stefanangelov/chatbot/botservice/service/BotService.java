@@ -8,6 +8,7 @@ import eu.stefanangelov.chatbot.botservice.to.BotResponse;
 import eu.stefanangelov.chatbot.botservice.to.UserMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +29,19 @@ public class BotService implements Function<UserMessage, BotResponse> {
 
     private final FlowFactoryService flowFactoryService;
 
+    @Value("${error.message}")
+    private String defaultErrorMessage;
+
     @Override
     public BotResponse apply(UserMessage userMessage) {
-        log.info("Process message with id {} for user with identificator {}", userMessage.getMessageId(), userMessage.getUserIdentificator());
-        ResponseEntity<NluResponse> nluResponse = nluRestService.apply(userMessage);
-        FlowProcessor flowProcessor = flowFactoryService.apply(nluResponse.getBody().getIntent());
-        return flowProcessor.execute(nluResponse.getBody());
+        try {
+            log.info("Process message with id {} for user with identificator {}", userMessage.getMessageId(), userMessage.getUserIdentificator());
+            ResponseEntity<NluResponse> nluResponse = nluRestService.apply(userMessage);
+            FlowProcessor flowProcessor = flowFactoryService.apply(nluResponse.getBody().getIntent());
+            return flowProcessor.execute(nluResponse.getBody());
+        } catch (Exception ex) {
+            log.error("Exception occurs when we process {}, exception {} ", userMessage, ex);
+            return new BotResponse().content(defaultErrorMessage).status(BotResponse.StatusEnum.ERROR);
+        }
     }
 }

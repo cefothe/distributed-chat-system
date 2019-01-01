@@ -35,6 +35,7 @@ public class SupplyChainFlowProcessor implements FlowProcessor {
 
     @Override
     public BotResponse execute(NluResponse nluResponse) {
+        log.info("Execute supply chain flow");
         String graphQLQuery = graphQLBuilder.buildQuery(nluResponse);
         JSONObject response = graphQLTemplate.apply(graphQLQuery);
         ActionType action = actionService.findIntentByName(nluResponse.getIntent().getIntentName()).orElseThrow(IllegalArgumentException::new);

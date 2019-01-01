@@ -7,6 +7,7 @@ import eu.stefanangelov.chatbot.botservice.ontology.OntologyService;
 import eu.stefanangelov.chatbot.botservice.ontology.to.AttributeType;
 import eu.stefanangelov.chatbot.botservice.ontology.to.ClassType;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,6 +15,7 @@ import java.util.Optional;
 /**
  * Created by Stefan Angelov - Delta Source Bulgaria on 31.12.18.
  */
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class GraphQLBuilder {
@@ -22,6 +24,7 @@ public class GraphQLBuilder {
     private final OntologyService ontologyService;
 
     public String buildQuery(NluResponse nluResponse) {
+        log.info("Generate GraphQL query");
         StringBuilder sb = new StringBuilder();
         sb.append("{\"query\":\"\\n{\\n  ");
         actionService.findIntentByName(nluResponse.getIntent().getIntentName()).ifPresent(
