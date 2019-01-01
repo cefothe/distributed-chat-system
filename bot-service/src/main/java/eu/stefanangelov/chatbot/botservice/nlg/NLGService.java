@@ -2,6 +2,7 @@ package eu.stefanangelov.chatbot.botservice.nlg;
 
 import eu.stefanangelov.chatbot.botservice.action.to.ActionType;
 import eu.stefanangelov.chatbot.botservice.ontology.OntologyService;
+import eu.stefanangelov.chatbot.botservice.ontology.to.AttributeType;
 import eu.stefanangelov.chatbot.botservice.ontology.to.ClassType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,7 @@ public class NLGService {
     public String generate(JSONObject jsonObject, ClassType classType, ActionType action) {
         log.info("Generate response");
         StringBuilder sb = new StringBuilder();
-        ontologyService.findClassByName(action.getClazz()).ifPresent((clazz) -> {
+        ontologyService.findClassByName(action.getClazz()).ifPresent(clazz -> {
             String queryAttribute = queryAttribute(action, clazz);
             JSONObject data = getGraphQLData(getGraphQLData(jsonObject, "data"), action.getName());
             String value = String.format("I found following information for %s with identifier %s </br>", clazz.getSpelling(), data.get(queryAttribute));
@@ -56,7 +57,7 @@ public class NLGService {
     private String queryAttribute(ActionType action, ClassType clazz) {
         return clazz.getAttributes().getAttribute().stream()
                 .filter(attributeType -> attributeType.getClazz().equals(action.getRequestParams().getParam()))
-                .findFirst().map(x -> x.getValue()).orElseThrow(IllegalArgumentException::new);
+                .findFirst().map(AttributeType::getValue).orElseThrow(IllegalArgumentException::new);
     }
 
     private JSONObject getGraphQLData(JSONObject jsonObject, String key) {
