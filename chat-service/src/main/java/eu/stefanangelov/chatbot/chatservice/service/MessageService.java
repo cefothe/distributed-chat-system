@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
+
 /**
  * This service is responsible to handle all operation for messages
  *
@@ -39,6 +41,7 @@ public class MessageService {
         log.info("Persist user message with user indentificator {}", messageTO.getUserIdentificator());
         Message message = modelMapper.map(messageTO, Message.class);
         messageRepository.save(message);
+        messageTO.setMessageId(message.getMessageId());
         log.info("Message is successfully persistent");
     }
 
@@ -52,6 +55,7 @@ public class MessageService {
         ResponseEntity<MessageTO> botResponse = restTemplate.postForEntity(botServiceUrl, messageTO, MessageTO.class);
         log.info("Save bot response into database");
         Message message = modelMapper.map(botResponse.getBody(), Message.class);
+        message.setCreated(new Date());
         messageRepository.save(message);
         log.info("Bot response is successfully persistent");
         return  botResponse.getBody();

@@ -16,6 +16,9 @@ import java.util.Date;
 @Data
 @Validated
 public class MessageTO {
+    
+    @JsonProperty("messageId")
+    private String messageId = null;
 
     @JsonProperty("userIdentificator")
     private String userIdentificator = null;

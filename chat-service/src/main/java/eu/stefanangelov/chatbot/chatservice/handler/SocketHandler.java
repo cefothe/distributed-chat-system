@@ -12,6 +12,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Created by Stefan Angelov - Delta Source Bulgaria on 26.12.18.
@@ -30,6 +31,7 @@ public class SocketHandler extends TextWebSocketHandler {
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
 
         MessageTO messageTO = objectMapper.readValue(message.getPayload(), MessageTO.class);
+        messageTO.setCreated(new Date());
 
         messageService.processUserMessage(messageTO);
 
