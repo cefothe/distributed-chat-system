@@ -23,10 +23,10 @@ public class NLGService {
         log.info("Generate response");
         StringBuilder sb = new StringBuilder();
         ontologyService.findClassByName(action.getClazz()).ifPresent(clazz -> {
-            String queryAttribute = queryAttribute(action, clazz);
             JSONObject data = getGraphQLData(getGraphQLData(jsonObject, "data"), action.getName());
-            String value = String.format("I found following information for %s with identifier %s </br>", clazz.getSpelling(), data.get(queryAttribute));
+            String value = String.format("I found following information for %s ", clazz.getSpelling());
             sb.append(value);
+            queryAttribute(action, clazz, sb, data);
             generateDataTable(sb, classType, data);
         });
 
@@ -54,10 +54,13 @@ public class NLGService {
         sb.append("</table>");
     }
 
-    private String queryAttribute(ActionType action, ClassType clazz) {
-        return clazz.getAttributes().getAttribute().stream()
+    private void queryAttribute(ActionType action, ClassType clazz, StringBuilder sb, JSONObject data) {
+        AttributeType requestParam = clazz.getAttributes().getAttribute().stream()
                 .filter(attributeType -> attributeType.getClazz().equals(action.getRequestParams().getParam()))
-                .findFirst().map(AttributeType::getValue).orElseThrow(IllegalArgumentException::new);
+                .findFirst().orElseThrow(IllegalArgumentException::new);
+        ontologyService.findClassByName(requestParam.getClazz()).ifPresent(x -> {
+            sb.append(String.format("for %s : %s ", x.getSpelling(), data.get(requestParam.getValue())));
+        });
     }
 
     private JSONObject getGraphQLData(JSONObject jsonObject, String key) {

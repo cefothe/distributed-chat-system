@@ -48,4 +48,10 @@
             <attribute class="PlannedShipDate">plannedShipDate</attribute>
         </attributes>
     </class>
+
+    <class name="SalesOrders">
+        <subClassOf>Showable</subClassOf>
+        <spelling>sales order</spelling>
+        <isListOf>SalesOrder</isListOf>
+    </class>
 </ontology>

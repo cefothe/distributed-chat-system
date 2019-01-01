@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AnythingFlowProcessor implements FlowProcessor {
 
-    @Value("anything.message")
+    @Value("${anything.message}")
     public String message;
 
     public static final String FLOW_NAME = "anythingFlowProcessor";

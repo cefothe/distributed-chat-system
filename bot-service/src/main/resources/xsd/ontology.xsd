@@ -10,6 +10,7 @@
 
     <xs:complexType name="classType">
         <xs:all>
+            <xs:element name="isListOf" type="xs:string"></xs:element>
             <xs:element name="spelling" type="xs:string" minOccurs="0"/>
             <xs:element name="subClassOf" type="xs:string" minOccurs="0"/>
             <xs:element name="attributes" type="attributesTypes" minOccurs="0"/>
