@@ -1,5 +1,7 @@
 type Query {
-    salesOrderById(id: ID!):SalesOrder
+    saleOrderById(id: ID!):SalesOrder
+    saleOrders :[SalesOrder!]!
+    saleOrdersByOrderStatus(orderStatus:OrderStatus!):[SalesOrder!]!
 }
 type SalesOrder {
     id: ID!
