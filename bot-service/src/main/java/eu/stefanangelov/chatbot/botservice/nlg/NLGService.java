@@ -4,6 +4,7 @@ import eu.stefanangelov.chatbot.botservice.action.to.ActionType;
 import eu.stefanangelov.chatbot.botservice.ontology.OntologyService;
 import eu.stefanangelov.chatbot.botservice.ontology.to.AttributeType;
 import eu.stefanangelov.chatbot.botservice.ontology.to.ClassType;
+import eu.stefanangelov.chatbot.botservice.supplychain.QueryParamsSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -22,6 +23,7 @@ import java.util.stream.StreamSupport;
 public class NLGService {
 
     private final OntologyService ontologyService;
+    private final QueryParamsSession queryParamsSession;
 
     public String generate(JSONObject jsonObject, ClassType classType, ActionType action) {
         log.info("Generate response");
@@ -29,8 +31,9 @@ public class NLGService {
         ontologyService.findClassByName(action.getClazz()).ifPresent(clazz -> {
             String value = String.format("I found following information for %s ", clazz.getSpelling());
             sb.append(value);
+            queryAttribute(action, clazz, sb);
             generateResponse(getGraphQLData(jsonObject, "data"), action.getName(), (jsonData) -> generateDataTable(sb, classType, jsonData));
-            //queryAttribute(action, clazz, sb, data);
+
 
         });
 
@@ -74,12 +77,18 @@ public class NLGService {
         sb.append("</table>");
     }
 
-    private void queryAttribute(ActionType action, ClassType clazz, StringBuilder sb, JSONObject data) {
+    private void queryAttribute(ActionType action, ClassType clazz, StringBuilder sb) {
+        if (clazz.getIsListOf() != null) {
+            clazz = ontologyService.findClassByName(clazz.getIsListOf()).orElseThrow(IllegalArgumentException::new);
+        }
+        if (action.getRequestParams() == null || action.getRequestParams().getParam() == null) {
+            return;
+        }
         AttributeType requestParam = clazz.getAttributes().getAttribute().stream()
-                .filter(attributeType -> attributeType.getClazz().equals(action.getRequestParams().getParam()))
+                .filter(attributeType -> action.getRequestParams() != null && attributeType.getClazz().equals(action.getRequestParams().getParam()))
                 .findFirst().orElseThrow(IllegalArgumentException::new);
         ontologyService.findClassByName(requestParam.getClazz())
-                .ifPresent(x -> sb.append(String.format("for %s : %s ", x.getSpelling(), data.get(requestParam.getValue()))));
+                .ifPresent(x -> sb.append(String.format("for %s : %s ", x.getSpelling(), queryParamsSession.requestParamValue(x))));
     }
 
     private JSONObject getGraphQLData(JSONObject jsonObject, String key) {

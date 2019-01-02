@@ -22,6 +22,7 @@ public class GraphQLBuilder {
 
     private final ActionService actionService;
     private final OntologyService ontologyService;
+    private final QueryParamsSession queryParamsSession;
 
     public String buildQuery(NluResponse nluResponse) {
         log.info("Generate GraphQL query");
@@ -31,10 +32,15 @@ public class GraphQLBuilder {
                 x -> {
                     sb.append(x.getName());
                     if (x.getRequestParams() != null && x.getRequestParams().getParam() != null) {
+                        Optional<ClassType> clazz = ontologyService.findClassByName(x.getClazz());
+                        String value = slotValue(nluResponse, x.getRequestParams().getParam());
                         sb.append("(");
-                        sb.append(nameOfParam(x.getRequestParams().getParam(), ontologyService.findClassByName(x.getClazz())) + ":");
-                        sb.append(slotValue(nluResponse, x.getRequestParams().getParam()));
+                        sb.append(nameOfParam(x.getRequestParams().getParam(), clazz));
+                        sb.append(":");
+                        sb.append(value);
                         sb.append(")\\n");
+                        ClassType queryClass = ontologyService.findClassByName(classOfParam(x.getRequestParams().getParam(), clazz)).orElseThrow(IllegalArgumentException::new);
+                        queryParamsSession.putParam(queryClass, value);
                     }
                     applyAttributes(sb, ontologyService.findClassByName(x.getClazz()));
                 }
@@ -71,6 +77,14 @@ public class GraphQLBuilder {
                         .findAny()
                         .orElseThrow(IllegalArgumentException::new))
                 .map(AttributeType::getValue).orElseThrow(IllegalArgumentException::new);
+    }
 
+    private String classOfParam(String param, Optional<ClassType> classByName) {
+        return classByName.map(clazz ->
+                clazz.getAttributes().getAttribute().stream()
+                        .filter(x -> x.getClazz().equals(param))
+                        .findAny()
+                        .orElseThrow(IllegalArgumentException::new))
+                .map(AttributeType::getClazz).orElseThrow(IllegalArgumentException::new);
     }
 }
