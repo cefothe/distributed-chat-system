@@ -28,18 +28,18 @@ values:
 # GetSalesOrderById Intent
 ---
 type: intent
-name: saleOrderById
+name: salesOrderById
 utterances:
   - Show me [salesorder:SalesOrders](sales order) with id [identifier:Identifier](123)
   - Give me [salesorder:SalesOrders](sales order) with identificator [identifier:Identifier](4345)
 
-# GetAllSupplyOrders
+# AllSupplyOrders
 ---
 type: intent
-name: allSupplyOrders
+name: salesOrders
 utterances:
-  - Show me all [supplyorder:SupplyOrder](supply orders)
-  - Give me all [supplyorder:SupplyOrder](supply orders)
+  - Show me all [salesorder:SalesOrders](sales order)
+  - Give me all [salesorder:SalesOrders](sales order)
 
 
 # Greeting

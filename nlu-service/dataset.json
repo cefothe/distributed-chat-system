@@ -6,6 +6,17 @@
       "matching_strictness": 1.0,
       "use_synonyms": true
     },
+    "OrderStatus": {
+      "automatically_extensible": true,
+      "data": [
+        {
+          "synonyms": [],
+          "value": "DRAFT, CONFIRMED, CLOSED, VOID"
+        }
+      ],
+      "matching_strictness": 1.0,
+      "use_synonyms": true
+    },
     "SalesOrders": {
       "automatically_extensible": true,
       "data": [
@@ -36,34 +47,6 @@
     }
   },
   "intents": {
-    "getAllSupplyOrders": {
-      "utterances": [
-        {
-          "data": [
-            {
-              "text": "Show me all "
-            },
-            {
-              "entity": "SupplyOrder",
-              "slot_name": "supplyorder",
-              "text": "supply orders"
-            }
-          ]
-        },
-        {
-          "data": [
-            {
-              "text": "Give me all "
-            },
-            {
-              "entity": "SupplyOrder",
-              "slot_name": "supplyorder",
-              "text": "supply orders"
-            }
-          ]
-        }
-      ]
-    },
     "goodbye": {
       "utterances": [
         {
@@ -181,6 +164,34 @@
               "entity": "Identifier",
               "slot_name": "identifier",
               "text": "4345"
+            }
+          ]
+        }
+      ]
+    },
+    "salesOrders": {
+      "utterances": [
+        {
+          "data": [
+            {
+              "text": "Show me all "
+            },
+            {
+              "entity": "SalesOrders",
+              "slot_name": "salesorder",
+              "text": "sales order"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Give me all "
+            },
+            {
+              "entity": "SalesOrders",
+              "slot_name": "salesorder",
+              "text": "sales order"
             }
           ]
         }
