@@ -29,12 +29,13 @@ public class GraphQLBuilder {
         sb.append("{\"query\":\"\\n{\\n  ");
         actionService.findIntentByName(nluResponse.getIntent().getIntentName()).ifPresent(
                 x -> {
-                    sb.append(x.getName()).append("(");
+                    sb.append(x.getName());
                     if (x.getRequestParams() != null && x.getRequestParams().getParam() != null) {
+                        sb.append("(");
                         sb.append(nameOfParam(x.getRequestParams().getParam(), ontologyService.findClassByName(x.getClazz())) + ":");
                         sb.append(slotValue(nluResponse, x.getRequestParams().getParam()));
+                        sb.append(")\\n");
                     }
-                    sb.append(")\\n");
                     applyAttributes(sb, ontologyService.findClassByName(x.getClazz()));
                 }
         );
@@ -46,8 +47,12 @@ public class GraphQLBuilder {
 
     private void applyAttributes(StringBuilder sb, Optional<ClassType> classByName) {
         classByName.ifPresent(x -> {
+            ClassType clazz = x;
+            if (x.getIsListOf() != null) {
+                clazz = ontologyService.findClassByName(x.getIsListOf()).orElseThrow(IllegalArgumentException::new);
+            }
             sb.append("{");
-            x.getAttributes().getAttribute().forEach(attributeType ->
+            clazz.getAttributes().getAttribute().forEach(attributeType ->
                     sb.append(attributeType.getValue()).append("\\n")
             );
             sb.append("}");

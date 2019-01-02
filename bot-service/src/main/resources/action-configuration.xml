@@ -5,4 +5,7 @@
             <param>Identifier</param>
         </requestParams>
     </action>
+    <action name="salesOrders">
+        <class>SalesOrders</class>
+    </action>
 </actions>

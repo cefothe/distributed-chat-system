@@ -12,6 +12,8 @@ import java.util.function.Function;
 import static eu.stefanangelov.chatbot.botservice.flow.anything.AnythingFlowProcessor.FLOW_NAME;
 
 /**
+ * Factory to construct {@link FlowProcessor} depending of current action
+ *
  * Created by Stefan Angelov - Delta Source Bulgaria on 28.12.18.
  */
 @Slf4j

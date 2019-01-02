@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
+ * This class is responsible to anything else flow
+ *
  * Created by Stefan Angelov - Delta Source Bulgaria on 28.12.18.
  */
 @Component

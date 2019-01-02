@@ -16,6 +16,8 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 /**
+ * This is class is responsible to send message to GraphQL service and generate response
+ *
  * Created by Stefan Angelov - Delta Source Bulgaria on 28.12.18.
  */
 @Slf4j

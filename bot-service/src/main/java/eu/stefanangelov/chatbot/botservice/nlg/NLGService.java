@@ -6,8 +6,12 @@ import eu.stefanangelov.chatbot.botservice.ontology.to.AttributeType;
 import eu.stefanangelov.chatbot.botservice.ontology.to.ClassType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+
+import java.util.function.Consumer;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by Stefan Angelov - Delta Source Bulgaria on 1.01.19.
@@ -23,18 +27,34 @@ public class NLGService {
         log.info("Generate response");
         StringBuilder sb = new StringBuilder();
         ontologyService.findClassByName(action.getClazz()).ifPresent(clazz -> {
-            JSONObject data = getGraphQLData(getGraphQLData(jsonObject, "data"), action.getName());
             String value = String.format("I found following information for %s ", clazz.getSpelling());
             sb.append(value);
-            queryAttribute(action, clazz, sb, data);
-            generateDataTable(sb, classType, data);
+            generateResponse(getGraphQLData(jsonObject, "data"), action.getName(), (jsonData) -> generateDataTable(sb, classType, jsonData));
+            //queryAttribute(action, clazz, sb, data);
+
         });
 
 
         return sb.toString();
     }
 
+    private void generateResponse(JSONObject jsonObject, String actionName, Consumer<JSONObject> generate) {
+        Object actionData = jsonObject.get(actionName);
+        if (actionData instanceof JSONObject) {
+            generate.accept((JSONObject) actionData);
+        }
+        if (actionData instanceof JSONArray) {
+            StreamSupport.stream(((JSONArray) actionData).spliterator(), false)
+                    .filter(x -> x instanceof JSONObject)
+                    .map(x -> (JSONObject) x)
+                    .forEach(generate::accept);
+        }
+    }
+
     private void generateDataTable(StringBuilder sb, ClassType classType, JSONObject data) {
+        if (classType.getIsListOf() != null) {
+            classType = ontologyService.findClassByName(classType.getIsListOf()).orElseThrow(IllegalArgumentException::new);
+        }
         sb.append("<table>");
         classType.getAttributes().getAttribute()
                 .forEach(attributeType -> {
@@ -58,9 +78,8 @@ public class NLGService {
         AttributeType requestParam = clazz.getAttributes().getAttribute().stream()
                 .filter(attributeType -> attributeType.getClazz().equals(action.getRequestParams().getParam()))
                 .findFirst().orElseThrow(IllegalArgumentException::new);
-        ontologyService.findClassByName(requestParam.getClazz()).ifPresent(x -> {
-            sb.append(String.format("for %s : %s ", x.getSpelling(), data.get(requestParam.getValue())));
-        });
+        ontologyService.findClassByName(requestParam.getClazz())
+                .ifPresent(x -> sb.append(String.format("for %s : %s ", x.getSpelling(), data.get(requestParam.getValue()))));
     }
 
     private JSONObject getGraphQLData(JSONObject jsonObject, String key) {
