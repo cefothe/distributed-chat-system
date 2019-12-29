@@ -1,11 +1,12 @@
 package eu.stefanangelov.chatbot.botservice.nlu.to;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Nlu Response
@@ -14,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NluResponse {
+public class NluResponse implements Serializable {
 
     private String input;
     private Intent intent;

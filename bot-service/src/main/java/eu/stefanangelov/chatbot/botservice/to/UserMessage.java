@@ -1,22 +1,27 @@
 package eu.stefanangelov.chatbot.botservice.to;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.validation.annotation.Validated;
+import java.io.Serializable;
+import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import org.springframework.validation.annotation.Validated;
 
 
 /**
  * UserMessage
  */
+@ToString(exclude = "created" )
 @Data
 @NoArgsConstructor
 @Validated
-public class UserMessage {
+public class UserMessage implements Serializable {
 
   @JsonProperty("messageId")
   @NotNull
