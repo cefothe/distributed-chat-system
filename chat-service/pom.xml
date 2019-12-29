@@ -15,7 +15,7 @@
 	<description>Chat service application</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<org.modelmapper.version>2.3.2</org.modelmapper.version>
 		<io.swagger.version>1.5.21</io.swagger.version>
 	</properties>
@@ -79,6 +79,13 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<release>${java.version}</release>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
