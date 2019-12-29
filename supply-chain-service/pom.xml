@@ -16,7 +16,6 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-<!--		<kotlin.version>1.3.10</kotlin.version>-->
 		<graphql.java.kickstart>6.0.1</graphql.java.kickstart>
 		<graphql.java.datetime>1.6.0</graphql.java.datetime>
 	</properties>
