@@ -1,0 +1,20 @@
+{
+  "parsers_metadata": [
+    {
+      "entity_identifier": "Identifier",
+      "entity_parser": "parser_1"
+    },
+    {
+      "entity_identifier": "OrderStatus",
+      "entity_parser": "parser_2"
+    },
+    {
+      "entity_identifier": "SalesOrders",
+      "entity_parser": "parser_3"
+    },
+    {
+      "entity_identifier": "SupplyOrder",
+      "entity_parser": "parser_4"
+    }
+  ]
+}
