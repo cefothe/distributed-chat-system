@@ -9,5 +9,6 @@ WORKDIR /usr/src/app
 COPY nlu-service ./
 
 RUN pip install --no-cache-dir -r requirements.txt
+RUN python -m snips_nlu download en
 
 CMD [ "python", "./server.py" ]

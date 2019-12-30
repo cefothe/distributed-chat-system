@@ -28,5 +28,9 @@ services:
       JAR_FILE: bot-service.jar
     depends_on:
       - redis
+  nlu-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-python  
   redis:
     image: redis:latest    

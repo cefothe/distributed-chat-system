@@ -22,4 +22,4 @@ class NLU(Resource):
 api.add_resource(NLU, '/api/analyze')
 
 if __name__ == '__main__':
-    app.run(port='5002')
+    app.run(port='5002',host='0.0.0.0')
