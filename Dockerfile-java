@@ -1,0 +1,17 @@
+FROM openjdk:11-jdk
+MAINTAINER Stefan Angelov <cefothe@gmail.com>
+
+# These ENV vars can be overridden in docker-compose.yml
+ENV JAR_FILE=app.jar
+ENV DEBUG_MICROSERVICE=false
+
+# Set timezone to Europe/Sofia
+RUN echo Europe/Sofia > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
+COPY ./docker/scripts/docker-entrypoint-java.sh /
+
+RUN chmod +x /docker-entrypoint-java.sh
+ENV JAVA_OPTS=""
+
+CMD ["/docker-entrypoint-java.sh"]
