@@ -1,0 +1,8 @@
+Flask==1.1.1
+Flask-Cors==3.0.8
+Flask-Jsonpify==1.5.0
+Flask-RESTful==0.3.7
+snips-nlu==0.20.1
+snips-nlu-en==0.2.3
+snips-nlu-parsers==0.4.2
+snips-nlu-utils==0.9.1
