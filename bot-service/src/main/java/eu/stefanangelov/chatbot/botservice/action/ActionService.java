@@ -4,6 +4,7 @@ import eu.stefanangelov.chatbot.botservice.action.to.ActionType;
 import eu.stefanangelov.chatbot.botservice.action.to.Actions;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -13,6 +14,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -22,7 +24,7 @@ import java.util.Optional;
 public class ActionService {
 
     @Value("${actions.location}")
-    private String actionsLocation;
+    private Resource actionsLocation;
 
     @Getter
     public Actions actions;
@@ -38,9 +40,9 @@ public class ActionService {
     }
 
     @PostConstruct
-    public void postConstruct() throws JAXBException, FileNotFoundException {
+    public void postConstruct() throws JAXBException, IOException {
         JAXBContext jaxbContext = JAXBContext.newInstance(Actions.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        this.actions = (Actions) JAXBIntrospector.getValue(unmarshaller.unmarshal(ResourceUtils.getFile(actionsLocation)));
+        this.actions = (Actions) JAXBIntrospector.getValue(unmarshaller.unmarshal(actionsLocation.getInputStream()));
     }
 }

@@ -4,6 +4,7 @@ import eu.stefanangelov.chatbot.botservice.ontology.to.ClassType;
 import eu.stefanangelov.chatbot.botservice.ontology.to.Ontology;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -13,6 +14,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -22,7 +24,7 @@ import java.util.Optional;
 public class OntologyService {
 
     @Value("${ontology.location}")
-    private String ontologyLocation;
+    private Resource ontologyLocation;
 
     @Getter
     public Ontology ontology;
@@ -38,9 +40,9 @@ public class OntologyService {
     }
 
     @PostConstruct
-    public void postConstruct() throws JAXBException, FileNotFoundException {
+    public void postConstruct() throws JAXBException, IOException {
         JAXBContext jaxbContext = JAXBContext.newInstance(Ontology.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        this.ontology = (Ontology) JAXBIntrospector.getValue(unmarshaller.unmarshal(ResourceUtils.getFile(ontologyLocation)));
+        this.ontology = (Ontology) JAXBIntrospector.getValue(unmarshaller.unmarshal(ontologyLocation.getInputStream()));
     }
 }
