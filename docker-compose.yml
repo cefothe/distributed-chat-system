@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  chat-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-java
+    volumes:
+      - ./docker/volumes/deployment:/app:ro
+    environment:
+      JAR_FILE: chat-service.jar
+    ports:
+      - "8081:8081"  
+  supply-chain-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-java
+    volumes:
+      - ./docker/volumes/deployment:/app:ro
+    environment:
+      JAR_FILE: supply-chain-service.jar
+  bot-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-java
+    volumes:
+      - ./docker/volumes/deployment:/app:ro
+    environment:
+      JAR_FILE: bot-service.jar
+    depends_on:
+      - redis
+  nlu-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-python  
+  redis:
+    image: redis:latest    

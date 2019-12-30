@@ -1,0 +1,14 @@
+FROM python:3.6
+MAINTAINER Stefan Angelov <cefothe@gmail.com>
+
+# Set timezone to Europe/Sofia
+RUN echo Europe/Sofia > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
+WORKDIR /usr/src/app
+COPY nlu-service ./
+
+RUN pip install --no-cache-dir -r requirements.txt
+RUN python -m snips_nlu download en
+
+CMD [ "python", "./server.py" ]
