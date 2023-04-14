@@ -20,7 +20,7 @@
 		<org.modelmapper.version>2.3.6</org.modelmapper.version>
 		<jaxb2.maven.plugin.version>2.5.0</jaxb2.maven.plugin.version>
 		<build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
-        <org.json.version>20190722</org.json.version>
+        <org.json.version>20230227</org.json.version>
 		<jaxb.api.version>2.3.1</jaxb.api.version>
 		<jaxb.impl.version>2.3.1</jaxb.impl.version>
 		<jaxb.core.version>2.3.0.1</jaxb.core.version>
